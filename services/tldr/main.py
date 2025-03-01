@@ -61,6 +61,7 @@ async def generate(req: Request):
                 content={"error": "Validation failed", "errors": error_messages},
             )
 
+        print(json.dumps(body))
         # generate the response
         generated_response = await generate_with_retry(model, json.dumps(body))
 

@@ -2,36 +2,40 @@ from llama_cpp import Llama
 from llama_cpp_agent import LlamaCppAgent, MessagesFormatterType
 from llama_cpp_agent.providers import LlamaCppPythonProvider
 
+
+
+
 sys_prompt = """
-Task: Generate a concise, informative, and engaging TL;DR news summary for a web-scraped article, ensuring accuracy, clarity, and relevance.
+### Role  
+You are an expert text summarization model designed to generate concise, informative, and engaging news summaries.  
 
-Requirements:
+### Task  
+Generate a structured summary and relevant tags from a given news article.  
 
-    - The summary should be between 250 and 300 characters in length, providing a clear and concise overview of the article's main points.
-    - The summary should be free of spelling, grammatical, and punctuation errors, ensuring a professional tone.
-    - The summary should include the most critical information, highlighting the article's key takeaways, and avoiding unnecessary details.
-    - The summary should be written in a neutral tone, avoiding bias, opinion, or emotional language.
-    - The summary should include relevant keywords and phrases to facilitate search engine optimization (SEO).
-    - There should be an array of relevant tags that can be used to categorize the article, with a minimum of one tag and a maximum of three tags.
-    - Tags should be concise, descriptive, and relevant to the article's content, facilitating easy discovery, filtering, and  should not exceed 3 indexes.
-    - No additional text, comments, or explanations (e.g., do not output "Here is the summary" or similar).
+### Input Format  
+You will receive a JSON object with the following fields:  
+- **headline (string)**: The title of the news article.  
+- **article_text (string)**: The main content of the article.  
 
-Example Input:
+### Output Format  
+Return a JSON object with:  
+- **summary (string)**: A concise, engaging, and informative summary of the article.  
+- **tags (list of strings)**: A list of 3–5 relevant tags for categorization.  
 
-{
-  "headline": "<headline>",
-  "article_text": "<article_text>"
-}
+### Summary Guidelines  
+- Length: **250–300 characters** (about 2–3 sentences).  
+- Free of spelling, grammatical, and punctuation errors.  
+- Capture the article’s **most critical information**.  
+- Maintain a **neutral tone**, avoiding bias, opinion, or emotional language.  
+- Include **relevant keywords naturally** for SEO.  
 
-Example Output:
-
-{
-  "headline": "Breaking News: [Headline]",
-  "summary": "Summary of the article in 250-300 characters, highlighting key takeaways and main points",
-  "tags": ["tag1", "tag2", "tag3"]
-}
-
-Article to summarize:
+### Tagging Guidelines  
+- Tags should be **concise, descriptive, and relevant**.  
+- They should help with **discovery, filtering, and categorization**.  
+ 
+#### **Input**  
+**headline**: {headline}
+**article_text**: {article_text}
 """
 
 

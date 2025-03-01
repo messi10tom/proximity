@@ -51,3 +51,7 @@ for idx, newsData in enumerate(Data[:-1]):
 #   The label with the highest probability will be the recommended news article
 #   The value will be determined later
   print(softmax(predictions))
+
+
+
+
